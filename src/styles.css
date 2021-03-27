@@ -1,0 +1,67 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+.canvas-list {
+}
+
+.canvas-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.canvas {
+  top: 200px;
+}
+
+.canvas_0 {
+  border-bottom: 1px solid #ccc;
+}
+
+.canvas_1 {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.canvas_2 {
+  border-bottom: 1px solid #ccc;
+}
+
+.canvas_3, .canvas_4{
+  border-right: 1px solid #ccc;
+}
+
+.btnViewpointList {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5em;
+}
+
+.btnViewpoint {
+  margin: .2em;
+  color: #69901f;
+  border: 2px solid #69901f;
+  background-color: white;
+  border-radius: .4em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  cursor: pointer;
+}
+
+.btnViewpoint:hover {
+  background-color: #eeeeee;
+}
+
+.btnViewpoint.active {
+  padding-left: 0;
+  padding-right: .8em;
+  border-bottom: 5px solid #69901f;
+}

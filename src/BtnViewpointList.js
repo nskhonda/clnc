@@ -12,7 +12,7 @@ function BtnViewpointList ({activeViewpoint, setViewpoint, ...props}) {
                 constant.array_btnText.map(
                     ({func, text}, index) => {
                         let className = "btnViewpoint"
-                        if (func == activeViewpoint) {
+                        if (func === activeViewpoint) {
                             className = "active btnViewpoint";
                         }
                         return <BtnViewpoint

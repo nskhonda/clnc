@@ -9,14 +9,14 @@ function CanvasList( {viewpoint, ...props} ) {
         <div className="canvas-row">
         {
             array_01.map((url, index) => (
-            <CanvasCell url={url} key={ index } order={ index }/>
+            <CanvasCell url={url} key={ index } order={ index } viewpoint={ viewpoint } />
             ))
         }
         </div>
         <div className="canvas-row">
         {
             array_02.map((url, index) => (
-            <CanvasCell url={url} key={`${index} + "th canvas"`} order={ 3 + index}/>
+            <CanvasCell url={url} key={`${index} + "th canvas"`} order={ 3 + index} viewpoint={ viewpoint }/>
             ))
         }
         </div>

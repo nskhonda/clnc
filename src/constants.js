@@ -53,3 +53,46 @@ export const array_Rotation = {
     other2: [0, 0, 270],
     other3: [180, 180, 180]
 }
+
+// export const array_gPos_rotation = {
+//     front: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [0, 0, 0]
+//         },
+//     left: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [0, 90, 0]
+//         },
+//     right: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [0, 270, 0]
+//         },
+//     up: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [90, 0, 0]
+//         },
+//     down: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [270, 0, 0]
+//         },
+//     other1: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [90, 0, 0]
+//         },
+//     other2: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [0, 0, 270]
+//         },
+//     other3: 
+//         {
+//             groupPosition: [0, 0, -10],
+//             rotation: [180, 180, 180]
+//         },
+// }

@@ -17,6 +17,9 @@ const Box = () => (
 const CanvasCell = ({url, order, viewpoint, ...props}) => {
   const Const_Rotation = constant.array_Rotation[viewpoint];
   const vRotation = [(Const_Rotation[0] * Math.PI) / 180, (Const_Rotation[1] * Math.PI) / 180, (Const_Rotation[2] * Math.PI) / 180]
+  // const gPos_rotation = constant.array_gPos_rotation[viewpoint];
+  // const rotation = gPos_rotation.rotation;
+  // const gPos = gPos_rotation.groupPosition;
 
   if (url.includes(".obj"))
   {
@@ -30,7 +33,7 @@ const CanvasCell = ({url, order, viewpoint, ...props}) => {
 
             <pointLight position={[0, 0, 215]} intensity={0.2} color="white" />
             <Suspense fallback={<Box/>}>
-              <Model url = {url} groupPosition={[0, 0, -10]} position={[0, 0, 0]} rotation={vRotation}/>    
+              <Model url = {url} groupPosition={[0, 0, -10]} rotation={vRotation}/>    
             </Suspense>
         </OrthographicCamera>
       </Canvas>

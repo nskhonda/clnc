@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from "react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import { useLoader } from "react-three-fiber";
 import * as THREE from "three";
@@ -11,13 +11,20 @@ function getVolume(geometry) {
       p2 = new THREE.Vector3(),
       p3 = new THREE.Vector3();
 
+  let xCenter = 0, yCenter = 0, zCenter = 0;  
+
   for(let i = 0; i < faces; i++) {
     p1.fromBufferAttribute(position, i * 3 + 0);
     p2.fromBufferAttribute(position, i * 3 + 1);
     p3.fromBufferAttribute(position, i * 3 + 2);
-    sum += signedVolumeOfTriangle(p1, p2, p3)
+    const curVol = signedVolumeOfTriangle(p1, p2, p3)
+    sum += curVol
+    xCenter += ((p1.x + p2.x + p3.x) / 4) * curVol
+    yCenter += ((p1.y + p2.y + p3.y) / 4) * curVol
+    zCenter += ((p1.z + p2.z + p3.z) / 4) * curVol
   }
-  return sum;
+  console.log([xCenter, yCenter, zCenter])
+  return [sum, [xCenter/sum, yCenter/sum, zCenter/sum]];
 }
 
 function signedVolumeOfTriangle(p1, p2, p3) {
@@ -26,31 +33,34 @@ function signedVolumeOfTriangle(p1, p2, p3) {
 
 
 const STLModel = ({ url, ...props }) => {
+  const [obj, setObj] = useState();
+  const [position, setPosition] = useState([0, 0, 0]);
   const mesh = useRef();
+  // const obj = useLoader(STLLoader, url);
 
-  // useMemo(() => {
-  //   let loader = new STLLoader();
-  //   const obj0 = loader.load(url, function(geometry) {
-  //   console.log("stl volume is " + getVolume(geometry));
-  //   set(geometry)
-  //   })
-
-  // }, [url])
-
-  const obj = useLoader(STLLoader, url);
-
+  useEffect(() => new STLLoader().load(url, setObj), [url]);
   
+  const size = useMemo(() => {
+    if (obj) {
+      const [volume, center0] = getVolume(obj);
+      console.log(center0)
+      setPosition([-center0[0], -center0[1], 0])
+      console.log(Math.pow(Math.abs(volume), 1/3))
+      return Math.pow(Math.abs(volume), 1/3);
+    } else {
+      return null;
+    }
+  }, [obj])
 
-  // const scale0 = props.scale ? props.scale: 20;
-  // scale={ [scale0 / size, scale0 / size, scale0 / size] }
-
-  return (
-    <group position={props.groupPosition} rotation={props.rotation}>
-      <mesh ref={mesh} position={props.position}>
+  const scale0 = props.scale ? props.scale: 80;
+//position={[0, 0, 0]}
+  return obj ? (
+    <group position={props.groupPosition} rotation={props.rotation} scale={ [scale0 / size, scale0 / size, scale0 / size] }>
+      <mesh ref={mesh}>
         <primitive object={obj} attach="geometry"/>
       </mesh>
     </group>    
-  );
+  ): null;
 };
 
 export default STLModel;

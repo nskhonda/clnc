@@ -15,7 +15,8 @@
   flex-direction: row;
 }
 
-.canvas {
+.canvas-row .canvas {
+  flex: 1 1 1;
   top: 200px;
 }
 

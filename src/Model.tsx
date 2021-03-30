@@ -1,17 +1,26 @@
-import React, { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef } from "react";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import * as THREE from "three";
+import { Group, Vector3, Euler } from "three";
 
-const Model = ({ url, ...props }) => {
-  const [obj, set] = useState();
+type Props = {
+  url: string,
+  scale: number,
+  groupPosition: number[],
+  rotation: number[], 
+}
+
+
+const Model = ({ url, scale, groupPosition, rotation }: Props) => {
+  const [obj, set] = useState<Group>();
   const mesh = useRef();
   useMemo(() => new OBJLoader().load(url, set), [url]);
   const [position, setPosition] = useState([0, 0, 0]);
-
+  
   const size = useMemo(() => {
     if (obj) {
       const box = new THREE.Box3().setFromObject(obj);
-      const center00 = box.getCenter();
+      const center00 = box.getCenter(undefined as any);
       const maxBox = box["max"];
       // const center0 = [
       //   (maxBox.x + minBox.x) / 2, (maxBox.y + minBox.y) / 2, (maxBox.z + minBox.z) / 2
@@ -28,12 +37,15 @@ const Model = ({ url, ...props }) => {
     }
   }, [obj])
 
-  const scale0 = props.scale ? props.scale: 20;
+  const gPos = new Vector3(groupPosition[0], groupPosition[1], groupPosition[2]);
+  const rot = new Euler(rotation[0], rotation[1], rotation[2]);
+  const scale0 = (scale ? scale: 20) as number;
 
-  return obj ? 
+
+  return (obj && size) ? 
   (
-    <group position={props.groupPosition} rotation={props.rotation} scale={ [scale0 / size, scale0 / size, scale0 / size] }>
-      <mesh ref={mesh} position={position}>
+    <group position={gPos} rotation={rot} scale={ new Vector3(scale0 / size, scale0 / size, scale0 /size) }>
+      <mesh ref={mesh} position={new Vector3(position[0], position[1], position[2])}>
         <primitive object={obj} />
       </mesh>
     </group>

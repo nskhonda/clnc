@@ -12,8 +12,12 @@ export const array_btnText = [
         text: "右側面"
     },
     {
-        func: "up",
+        func: "upper",
         text: "上顎"
+    },
+    {
+        func: "overjet",
+        text: "噛み合わせ"
     },
     {
         func: "down",
@@ -40,14 +44,88 @@ export const array_url = [
     "/soccer_ball.jpg",
     "/teamugstl.stl",
     "/ball_01.png"
-  ]
+]
 
+export const defaultImage = {
+	"img_url":"/soccer_ball.jpg",
+	"img_type":'tooth',
+	"date":'2021-03-21',
+	"view_point":'right',
+	"img_ext":'jpg',
+}
+
+export const arrayImage = [{
+	"id":1,
+	"img_url":"/Doglong.obj",
+	"img_type":'tooth',
+	"date":'2021-03-21',
+	"view_point":'right',
+	"img_ext":'obj',
+},
+{
+	"id":2,
+	"img_url":"/FinalBaseMesh.obj",
+	"img_type":'x-ray',
+	"date":'2021-03-17',
+	"view_point":'left',
+	"img_ext":'obj',
+},
+{
+	"id":3,
+	"img_url":"/12328_Statue_v1_L2.obj",
+	"img_type":'face',
+	"date":'2021-03-12',
+	"view_point":'right',
+	"img_ext":'obj',
+},
+{
+	id:4,
+	"img_url":'/soccer_ball.jpg',
+	"img_type":'tooth',
+	"date":'2021-03-13',
+	"view_point":'front',
+	"img_ext":'jpg',
+},
+{
+	id:5,
+	"img_url":'/teamugstl.stl',
+	"img_type":'face',
+	"date":'2021-03-13',
+	"view_point":'front',
+	"img_ext":'stl',
+},
+{
+	id:6,
+	"img_url":'/ball_01.png',
+	"img_type":'tooth',
+	"date":'2021-03-13',
+	"view_point":'front',
+	"img_ext":'png',
+},
+{
+	id:7,
+	"img_url":'/ball_01.png',
+	"img_type":'tooth',
+	"date":'2021-03-13',
+	"view_point":'front',
+	"img_ext":'png',
+},
+{
+	id:8,
+	"img_url":'/ball_01.png',
+	"img_type":'tooth',
+	"date":'2021-03-13',
+	"view_point":'front',
+	"img_ext":'png',
+}
+]
 
 export const array_Rotation = {
     front: [0, 0, 0],
     left: [0, 90, 0],
     right: [0, 270, 0],
-    up: [90, 0, 0],
+    upper: [90, 0, 0],
+    overjet: [0, 0, 0],
     down: [270, 0, 0],
     other1: [90, 0, 0],
     other2: [0, 0, 270],

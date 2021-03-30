@@ -1,5 +1,5 @@
 import "./styles.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import BtnViewpointList from "./BtnViewpointList";
 import CanvasList from "./CanvasList";
 import * as constant from "./constants";

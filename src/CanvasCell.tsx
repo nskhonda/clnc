@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
 import Model from "./Model";
 import STLModel from "./STLModel"
@@ -13,44 +13,49 @@ const Box = () => (
   </mesh>
 )
 
+type Props = {
+  url: string,
+  order: number,
+  viewpoint: string,
+  img_ext: string
+}
 
-const CanvasCell = ({url, order, viewpoint, ...props}) => {
-  const Const_Rotation = constant.array_Rotation[viewpoint];
-  const vRotation = [(Const_Rotation[0] * Math.PI) / 180, (Const_Rotation[1] * Math.PI) / 180, (Const_Rotation[2] * Math.PI) / 180]
+const CanvasCell = ({url, order, viewpoint, img_ext}: Props) => {
+  const Const_Rotation = constant.array_Rotation[viewpoint as keyof typeof constant['array_Rotation']];
+  const vRotation = [(Const_Rotation[0] * Math.PI) / 180, (Const_Rotation[1] * Math.PI) / 180, (Const_Rotation[2] * Math.PI) / 180];
   // const gPos_rotation = constant.array_gPos_rotation[viewpoint];
   // const rotation = gPos_rotation.rotation;
   // const gPos = gPos_rotation.groupPosition;
+  // resize={50}
 
-  if (url.includes(".obj"))
+  if (img_ext === "obj")
   {
     return (
       <Canvas
         className= {`canvas_${order} canvas`}
-        resize={50}
         style={{height: 400, width: 400}}
       >
         <OrthographicCamera makeDefault position={[300, 300, 300]} zoom={10}>
 
             <pointLight position={[0, 0, 215]} intensity={0.2} color="white" />
             <Suspense fallback={<Box/>}>
-              <Model url = {url} groupPosition={[0, 0, -10]} rotation={vRotation}/>    
+              <Model url = {url} groupPosition={[0, 0, -10]} rotation={vRotation} scale={20}/>    
             </Suspense>
         </OrthographicCamera>
       </Canvas>
     );
   }
-  else if (url.includes(".stl"))
+  else if (img_ext === "stl")
   {
     return (
       <Canvas
         className= {`canvas_${order} canvas`}
-        resize={50}
         style={{height: 400, width: 400}}
       >
         <OrthographicCamera makeDefault position={[0, 10, 0]} zoom={20}>
           <pointLight position={[10, 10, 10]} intensity={0.2} color="white" />
           <Suspense fallback={<Box/>}>
-            <STLModel url = {url} groupPosition={[0, 0, -10]} rotation={vRotation} />
+            <STLModel url = {url} groupPosition={[0, 0, -10]} rotation={vRotation} scale={80} />
           </Suspense>
         </OrthographicCamera>
       </Canvas>
@@ -61,12 +66,11 @@ const CanvasCell = ({url, order, viewpoint, ...props}) => {
     return (
       <Canvas
         className= {`canvas_${order} canvas`}
-        resize={50}
         style={{height: 400, width: 400}}
       >
         <OrthographicCamera makeDefault position={[10, 0, 0]} zoom={20}>
           <Suspense fallback={<Box/>}>
-            <TextureModel position={[10, 10, 10]} groupPosition={[0, 0, -10]} url={url} />
+            <TextureModel groupPosition={[0, 0, -10]} url={url} scale={200}/>
           </Suspense>
         </OrthographicCamera>
       </Canvas>

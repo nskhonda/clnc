@@ -2,7 +2,12 @@ import React from "react";
 import BtnViewpoint from "./BtnViewpoint"
 import * as constant from "./constants";
 
-function BtnViewpointList ({activeViewpoint, setViewpoint, ...props}) {
+type Props = {
+    activeViewpoint: string,
+    setViewpoint: (func: string) => any
+}
+
+function BtnViewpointList ({activeViewpoint, setViewpoint}: Props) {
     if (activeViewpoint === undefined) {
         activeViewpoint = constant.array_btnText[0].func;
     }
@@ -20,7 +25,6 @@ function BtnViewpointList ({activeViewpoint, setViewpoint, ...props}) {
                                     key={`${text}_btn_${index}`}
                                     className={className}
                                     onclick={() => {
-                                        console.log(func);
                                         setViewpoint(func);
                                     }}
                                 />;

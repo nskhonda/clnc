@@ -55,7 +55,7 @@ const CanvasCell = ({url, order, viewpoint, img_ext}: Props) => {
         <OrthographicCamera makeDefault position={[0, 10, 0]} zoom={20}>
           <pointLight position={[10, 10, 10]} intensity={0.2} color="white" />
           <Suspense fallback={<Box/>}>
-            <STLModel url = {url} groupPosition={[0, 0, -10]} rotation={vRotation} scale={80} />
+            <STLModel url = {url} groupPosition={[0, 0, -10]} rotation={vRotation} scale={120} />
           </Suspense>
         </OrthographicCamera>
       </Canvas>
@@ -70,7 +70,7 @@ const CanvasCell = ({url, order, viewpoint, img_ext}: Props) => {
       >
         <OrthographicCamera makeDefault position={[10, 0, 0]} zoom={20}>
           <Suspense fallback={<Box/>}>
-            <TextureModel groupPosition={[0, 0, -10]} url={url} scale={200}/>
+            <TextureModel groupPosition={[0, 0, -10]} url={url} scale={20}/>
           </Suspense>
         </OrthographicCamera>
       </Canvas>

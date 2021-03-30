@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useLoader } from "react-three-fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import { Vector3 } from "three";
@@ -15,20 +15,27 @@ const TextureModel = ({ url, scale, groupPosition }: Props) => {
     if (texture.image) {
       const width = texture.image.width;
       const height = texture.image.height;
-      return Math.sqrt( Math.pow(width, 2) + Math.pow(height, 2) );
+      if (width) {
+        console.log(width)
+        console.log(height)
+      }
+
+      // return Math.sqrt( Math.pow(width, 2) + Math.pow(height, 2) );
+      return height / width;
     } else {
       return null;
     }
   }, [texture]);
 
+
   const gPos = new Vector3(groupPosition[0], groupPosition[1], groupPosition[2]);
-  const scale0 = (scale ? scale: 200) as number;  
+  const scale0 = (scale ? scale: 10) as number;  
   // 
   return (size) ?
   (
-    <group position={gPos} scale={ [size / scale0, size / scale0, size / scale0] }> 
+    <group position={gPos}> 
       <mesh>
-        <planeBufferGeometry attach="geometry" args={[1, 1]}/>
+        <planeBufferGeometry attach="geometry" args={[scale0, scale0 * size]} />
         <meshBasicMaterial attach="material" map={texture} />
       </mesh>
     </group>

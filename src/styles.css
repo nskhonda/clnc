@@ -62,7 +62,5 @@
 }
 
 .btnViewpoint.active {
-  padding-left: 0;
-  padding-right: .8em;
   border-bottom: 5px solid #69901f;
 }

@@ -44,6 +44,10 @@ function CanvasList( {viewpoint}: Props ) {
         item => item.view_point === viewpoint
       )
 
+      if (viewpoint === "all") {
+        tempArray = [...arrayImage];
+      }
+
       let length = tempArray.length;
       if (length >= 6) {
         tempArray = tempArray.slice(0, 6);
@@ -91,6 +95,3 @@ function CanvasList( {viewpoint}: Props ) {
 }
 
 export default CanvasList;
-
-
-

@@ -1,17 +1,42 @@
-import { useMemo, useState, useRef } from "react";
+import { Suspense, useMemo, useState, useRef, useEffect } from "react";
+import { Canvas, useThree } from "react-three-fiber";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import * as THREE from "three";
-import { Group, Vector3 } from "three"; // Euler
+import { Group, Vector3, Euler } from "three"; // Euler
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 type Props = {
+  order: number,
   url: string,
   scale: number,
-  groupPosition: number[],
-  rotation: number[], 
 }
 
+const Box = () => (
+  <mesh>
+    <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
+    <meshStandardMaterial attach="material" transparent opacity={0.5} />
+  </mesh>
+)
 
-const Model = ({ url, scale, groupPosition, rotation }: Props) => {
+const CameraController = () => {
+  const { camera, gl } = useThree();
+  useEffect(
+    () => {
+      const controls = new OrbitControls(camera, gl.domElement);
+
+      controls.minDistance = 3;
+      controls.maxDistance = 20;
+      return () => {
+        controls.dispose();
+      };
+    },
+    [camera, gl]
+  );
+  return null;
+};
+
+
+const Model = ({ order, url, scale }: Props) => {
   const [obj, set] = useState<Group>();
   const mesh = useRef();
   useMemo(() => new OBJLoader().load(url, set), [url]);
@@ -20,35 +45,41 @@ const Model = ({ url, scale, groupPosition, rotation }: Props) => {
   const size = useMemo(() => {
     if (obj) {
       const box = new THREE.Box3().setFromObject(obj);
-      const center00 = box.getCenter(undefined as any);
       const maxBox = box["max"];
-      // const center0 = [
-      //   (maxBox.x + minBox.x) / 2, (maxBox.y + minBox.y) / 2, (maxBox.z + minBox.z) / 2
-      // ];
+      const minBox = box["min"];
+      const center0 = [
+        (maxBox.x + minBox.x) / 2, (maxBox.y + minBox.y) / 2, (maxBox.z + minBox.z) / 2
+      ];
       setPosition([
-        - center00.x, - center00.y, - center00.z
+        - center0[0], - center0[1], - center0[2]
       ]);
 
+      
+      var pivot = new THREE.Object3D();
+
       return Math.sqrt( Math.pow(maxBox.x, 2) + Math.pow(maxBox.y, 2) + Math.pow(maxBox.z, 2))
-      // const min0 = Math.sqrt( Math.pow(minBox.x, 2) + Math.pow(minBox.y, 2) + Math.pow(minBox.z, 2))
-      // const ave0 = (max0 + min0) / 2;
     } else {
       return null
     }
   }, [obj])
 
-  const gPos = new Vector3(groupPosition[0], groupPosition[1], groupPosition[2]);
-  // const rot = new Euler(rotation[0], rotation[1], rotation[2]);
   const scale0 = (scale ? scale: 20) as number;
-
-  // rotation={rot} 
   return (obj && size) ? 
   (
-    <group position={gPos} scale={ new Vector3(scale0 / size, scale0 / size, scale0 /size) }>
-      <mesh ref={mesh} position={new Vector3(position[0], position[1], position[2])}>
-        <primitive object={obj} />
-      </mesh>
-    </group>
+    <Canvas
+      className= {`canvas_${order} canvas`}
+      style={{height: 400, width: 400}}
+      >
+      <CameraController />
+      <spotLight position={[0, 0, 215]} intensity={0.2} color="white" />
+      <Suspense fallback={<Box/>}>
+        <group scale={ new Vector3(scale0 / size, scale0 / size, scale0 /size) }>
+          <mesh ref={mesh}>
+            <primitive object={obj} />
+          </mesh>
+        </group>
+      </Suspense>
+    </Canvas>
   )
    : null;
 };

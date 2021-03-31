@@ -4,7 +4,6 @@ import Model from "./Model";
 import STLModel from "./STLModel"
 import TextureModel from "./TextureModel";
 import { OrthographicCamera } from "@react-three/drei"
-import * as constant from "./constants";
 
 const Box = () => (
   <mesh>

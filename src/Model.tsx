@@ -2,7 +2,7 @@ import { Suspense, useMemo, useState, useRef, useEffect } from "react";
 import { Canvas, useThree } from "react-three-fiber";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import * as THREE from "three";
-import { Group, Vector3, Euler } from "three"; // Euler
+import { Group, Vector3 } from "three"; // Euler
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 type Props = {
@@ -54,8 +54,7 @@ const Model = ({ order, url, scale }: Props) => {
         - center0[0], - center0[1], - center0[2]
       ]);
 
-      
-      var pivot = new THREE.Object3D();
+
 
       return Math.sqrt( Math.pow(maxBox.x, 2) + Math.pow(maxBox.y, 2) + Math.pow(maxBox.z, 2))
     } else {

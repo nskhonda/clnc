@@ -62,9 +62,9 @@ const STLModel = ({ url, scale, groupPosition, rotation }: Props) => {
   const gPos = new Vector3(groupPosition[0], groupPosition[1], groupPosition[2]);
   const rot = new Euler(rotation[0], rotation[1], rotation[2]);
   const scale0 = (scale ? scale: 80 ) as number;
-  // position={[0, 0, 0]}
+  // position={[0, 0, 0]}  rotation={rot}
   return (obj && size) ? (
-    <group position={gPos} rotation={rot} scale={ new Vector3(scale0 / size, scale0 / size, scale0 /size) }>
+    <group position={gPos} scale={ new Vector3(scale0 / size, scale0 / size, scale0 /size) }>
       <mesh ref={mesh} position={ new Vector3(0, 0, 0)}>
         <primitive object={obj} attach="geometry"/>
       </mesh>

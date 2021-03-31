@@ -41,10 +41,10 @@ const Model = ({ url, scale, groupPosition, rotation }: Props) => {
   const rot = new Euler(rotation[0], rotation[1], rotation[2]);
   const scale0 = (scale ? scale: 20) as number;
 
-
+  // rotation={rot} 
   return (obj && size) ? 
   (
-    <group position={gPos} rotation={rot} scale={ new Vector3(scale0 / size, scale0 / size, scale0 /size) }>
+    <group position={gPos} scale={ new Vector3(scale0 / size, scale0 / size, scale0 /size) }>
       <mesh ref={mesh} position={new Vector3(position[0], position[1], position[2])}>
         <primitive object={obj} />
       </mesh>

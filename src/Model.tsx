@@ -1,7 +1,7 @@
 import { useMemo, useState, useRef } from "react";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import * as THREE from "three";
-import { Group, Vector3, Euler } from "three";
+import { Group, Vector3 } from "three"; // Euler
 
 type Props = {
   url: string,
@@ -38,7 +38,7 @@ const Model = ({ url, scale, groupPosition, rotation }: Props) => {
   }, [obj])
 
   const gPos = new Vector3(groupPosition[0], groupPosition[1], groupPosition[2]);
-  const rot = new Euler(rotation[0], rotation[1], rotation[2]);
+  // const rot = new Euler(rotation[0], rotation[1], rotation[2]);
   const scale0 = (scale ? scale: 20) as number;
 
   // rotation={rot} 

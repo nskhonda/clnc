@@ -24,14 +24,16 @@ function CanvasList( {viewpoint}: Props ) {
 
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
-      body: `id=${1}&date=${"2021/03/30"}`, 
+      headers: { 'Content-Type': 'application/json',
+                 'Access-Control-Allow-Origin': 'http://localhost:3000' 
+                },
+      body: JSON.stringify({id:1, date: "2021/03/30"})
     };
 
     fetch('http://silverbear3.sakura.ne.jp/public/api/', requestOptions)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        setArrayImage(data)
       })
   }, []);
 

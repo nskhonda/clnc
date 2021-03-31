@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { useLoader } from "react-three-fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import { Vector3 } from "three";
@@ -15,10 +15,6 @@ const TextureModel = ({ url, scale, groupPosition }: Props) => {
     if (texture.image) {
       const width = texture.image.width;
       const height = texture.image.height;
-      if (width) {
-        console.log(width)
-        console.log(height)
-      }
 
       // return Math.sqrt( Math.pow(width, 2) + Math.pow(height, 2) );
       return height / width;

@@ -1,7 +1,7 @@
 import { useRef, useMemo, useState, useEffect } from "react";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import * as THREE from "three";
-import { BufferGeometry, Euler } from "three";
+import { BufferGeometry } from "three"; // Euler
 import { Vector3 } from "three";
 
 type Props = {
@@ -60,7 +60,7 @@ const STLModel = ({ url, scale, groupPosition, rotation }: Props) => {
   }, [obj])
 
   const gPos = new Vector3(groupPosition[0], groupPosition[1], groupPosition[2]);
-  const rot = new Euler(rotation[0], rotation[1], rotation[2]);
+  // const rot = new Euler(rotation[0], rotation[1], rotation[2]);
   const scale0 = (scale ? scale: 80 ) as number;
   // position={[0, 0, 0]}  rotation={rot}
   return (obj && size) ? (

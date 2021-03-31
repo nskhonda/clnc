@@ -37,17 +37,8 @@ export const array_btnText = [
     }
 ]
 
-export const array_url = [
-    "/Doglong.obj",
-    "/FinalBaseMesh.obj",
-    "/12328_Statue_v1_L2.obj",
-    "/soccer_ball.jpg",
-    "/teamugstl.stl",
-    "/ball_01.png"
-]
-
 export const defaultImage = {
-	"img_url":"/soccer_ball.jpg",
+	"img_url":"/loading.png",
 	"img_type":'tooth',
 	"date":'2021-03-21',
 	"view_point":'right',
